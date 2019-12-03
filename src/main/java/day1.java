@@ -12,11 +12,12 @@ public class day1 {
                 accumulator+= fuelReqForMass(0, Integer.valueOf(reader.readLine()));
             }
             System.out.println(accumulator);
+            reader.close();
         } catch(IOException e) {
             System.err.println(e.getMessage());
         }
-
     }
+
     public static int fuelReqForMass(int total, int mass){
         int result = mass/3;
         result -= 2;
