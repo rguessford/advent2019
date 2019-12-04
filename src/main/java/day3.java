@@ -29,9 +29,6 @@ public class day3 {
                             if(p2.y > p1.y && p2.y < q1.y || p2.y < p1.y && p2.y > q1.y){
                                 //horizontal projection
                                 if(p1.x > p2.x && p1.x < q2.x || p1.x < p2.x && p1.x > q2.x){
-                                    System.out.println("intersection at " + p1.x + " " + p2.y + " " + (Math.abs(p1.x) + Math.abs(p2.y)));
-                                    System.out.println("line1 distance to intersection " + (p1.dist + Math.abs(p1.y - p2.y)));
-                                    System.out.println("line2 distance to intersection " + (p2.dist + Math.abs(p2.x - p1.x)));
                                     intersections.add(new Intersection(new Point(p1.x, p2.y, 0), p1.dist + Math.abs(p1.y - p2.y),p2.dist + Math.abs(p2.x - p1.x)));
                                 }
                             }
@@ -39,10 +36,7 @@ public class day3 {
                             if(p1.y > p2.y && p1.y < q2.y || p1.y < p2.y && p1.y > q2.y){
                                 //horizontal projection
                                 if(p2.x > p1.x && p2.x < q1.x || p2.x < p1.x && p2.x > q1.x){
-                                    System.out.println("intersection at " + p2.x + " " + p1.y + " " + (Math.abs(p2.x) + Math.abs(p1.y)));
-                                    System.out.println("line1 distance to intersection " + (p1.dist + Math.abs(p1.x - p2.x)));
-                                    System.out.println("line2 distance to intersection " + (p2.dist + Math.abs(p2.y - p1.y)));
-                                    intersections.add(new Intersection(new Point(p1.x, p2.y, 0), p1.dist + Math.abs(p1.x - p2.x),p2.dist + Math.abs(p2.y - p1.y)));
+                                    intersections.add(new Intersection(new Point(p2.x, p1.y, 0), p1.dist + Math.abs(p1.x - p2.x),p2.dist + Math.abs(p2.y - p1.y)));
                                 }
                             }
                         }
