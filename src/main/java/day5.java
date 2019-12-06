@@ -20,7 +20,7 @@ public class day5 {
 
             for (int executionPoint = 0; ; ) {
                 int[] instruction = new int[]{memory[executionPoint]/10000, (memory[executionPoint]/1000)%10, (memory[executionPoint]/100) % 10, memory[executionPoint]%100};
-                if(instruction[OPCODE] == 99) break;
+
                 if(instruction[OPCODE] == 1) {
                     //add
                     int a = 0;
@@ -128,7 +128,7 @@ public class day5 {
                     }
                     memory[memory[executionPoint+3]] = a == b ? 1 : 0;
                     executionPoint+=4;
-                }
+                } else if(instruction[OPCODE] == 99) break;
             }
 
             reader.close();
