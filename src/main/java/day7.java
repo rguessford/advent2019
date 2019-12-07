@@ -50,16 +50,13 @@ public class day7 {
                     j--;
                 }
                 ArrayList<Amplifier> amplifiers = new ArrayList<>();
-                System.out.println(Arrays.toString(phaseSettings));
                 for (int phaseSetting : phaseSettings) {
                     amplifiers.add(new Amplifier(Arrays.copyOf(program, program.length), phaseSetting));
                 }
                 int ampIndex = 0;
                 int input = 0;
                 while(!amplifiers.get(4).halted){
-                    System.out.println("input to amp " + ampIndex + ":" + input);
                     input = amplifiers.get(ampIndex).feedInput(input);
-                    System.out.println("output: " + input);
                     ampIndex++;
                     if(ampIndex == 5) ampIndex = 0;
                 }
