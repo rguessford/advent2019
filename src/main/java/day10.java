@@ -95,7 +95,6 @@ public class day10 {
             System.out.println(laserInstallationX+ ","+ laserInstallationY);
             ArrayList<Map.Entry<Coord, ArrayList<Coord>>> targetArray = new ArrayList<>(targetList.entrySet());
             targetArray.sort(new coordAngleComparator());
-            System.out.println(new Coord(0,1).angle());
             int beginIndex = -1;
             for (int i = 0; i < targetArray.size(); i++) {
                 if(targetArray.get(i).getKey().equals(new Coord(0,1))){
