@@ -72,138 +72,138 @@ public class day7 {
     }
 
     public static class Amplifier{
-        int executionPoint = 0;
-        int outputRegister;
-        boolean halted = false;
-        int[] program;
-        public Amplifier(int[] program_, int phaseSetting_){
-            program = program_;
-            feedInput(phaseSetting_);
-        }
+            int executionPoint = 0;
+            int outputRegister;
+            boolean halted = false;
+            int[] program;
+            public Amplifier(int[] program_, int phaseSetting_){
+                program = program_;
+                feedInput(phaseSetting_);
+            }
 
-        public int feedInput(int input){
-            boolean paused = false;
-            while (true) {
-                int[] instruction = new int[]{program[executionPoint]/10000, (program[executionPoint]/1000)%10, (program[executionPoint]/100) % 10, program[executionPoint]%100};
+            public int feedInput(int input){
+                boolean paused = false;
+                while (true) {
+                    int[] instruction = new int[]{program[executionPoint]/10000, (program[executionPoint]/1000)%10, (program[executionPoint]/100) % 10, program[executionPoint]%100};
 
-                if(instruction[OPCODE] == 1) {
-                    //add
-                    int a = 0;
-                    int b = 0;
-                    if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
-                        a = program[program[executionPoint + 1]];
-                    } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
-                        a = program[executionPoint + 1];
-                    }
-                    if(instruction[PARAMETER_MODE_2] == POSITION_MODE) {
-                        b = program[program[executionPoint + 2]];
-                    } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE){
-                        b = program[executionPoint + 2];
-                    }
-                    program[program[executionPoint+3]] = a + b;
-                    executionPoint +=4;
-                } else if (instruction[OPCODE] == 2) {
-                    //multiply
-                    int a = 0;
-                    int b = 0;
-                    if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
-                        a = program[program[executionPoint + 1]];
-                    } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
-                        a = program[executionPoint + 1];
-                    }
-                    if(instruction[PARAMETER_MODE_2] == POSITION_MODE) {
-                        b = program[program[executionPoint + 2]];
-                    } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE){
-                        b = program[executionPoint + 2];
-                    }
-                    program[program[executionPoint+3]] = a * b;
-                    executionPoint+=4;
-                } else if (instruction[OPCODE] == 3) {
-                    //input
-                    if(paused){
-                        break;
-                    }
-                    program[program[executionPoint+1]] = input;
-                    executionPoint+=2;
-                    paused=true;
-                } else if (instruction[OPCODE] == 4) {
-                    //output
-                    int a = 0;
-                    if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
-                        a = program[program[executionPoint + 1]];
-                    } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
-                        a = program[executionPoint + 1];
-                    }
-                    outputRegister = a;
-                    paused = true;
-                    executionPoint +=2;
-                } else if (instruction[OPCODE] == 5) {
-                    //jump if param 1 != 0
-                    int test = 0;
-                    if (instruction[PARAMETER_MODE_1] == POSITION_MODE) {
-                        test = program[program[executionPoint + 1]];
-                    } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE) {
-                        test = program[executionPoint + 1];
-                    }
-                    if(test == 0) {
-                        executionPoint += 3;
-                    } else if (instruction[PARAMETER_MODE_2] == POSITION_MODE) {
-                        executionPoint = program[program[executionPoint + 2]];
-                    } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE) {
-                        executionPoint = program[executionPoint + 2];
-                    }
-                } else if (instruction[OPCODE] == 6) {
-                    //jump if param 1 == 0
-                    int test = 0;
-                    if (instruction[PARAMETER_MODE_1] == POSITION_MODE) {
-                        test = program[program[executionPoint + 1]];
-                    } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE) {
-                        test = program[executionPoint + 1];
-                    }
-                    if(test == 0) {
-                        if (instruction[PARAMETER_MODE_2] == POSITION_MODE) {
+                    if(instruction[OPCODE] == 1) {
+                        //add
+                        int a = 0;
+                        int b = 0;
+                        if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
+                            a = program[program[executionPoint + 1]];
+                        } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
+                            a = program[executionPoint + 1];
+                        }
+                        if(instruction[PARAMETER_MODE_2] == POSITION_MODE) {
+                            b = program[program[executionPoint + 2]];
+                        } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE){
+                            b = program[executionPoint + 2];
+                        }
+                        program[program[executionPoint+3]] = a + b;
+                        executionPoint +=4;
+                    } else if (instruction[OPCODE] == 2) {
+                        //multiply
+                        int a = 0;
+                        int b = 0;
+                        if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
+                            a = program[program[executionPoint + 1]];
+                        } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
+                            a = program[executionPoint + 1];
+                        }
+                        if(instruction[PARAMETER_MODE_2] == POSITION_MODE) {
+                            b = program[program[executionPoint + 2]];
+                        } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE){
+                            b = program[executionPoint + 2];
+                        }
+                        program[program[executionPoint+3]] = a * b;
+                        executionPoint+=4;
+                    } else if (instruction[OPCODE] == 3) {
+                        //input
+                        if(paused){
+                            break;
+                        }
+                        program[program[executionPoint+1]] = input;
+                        executionPoint+=2;
+                        paused=true;
+                    } else if (instruction[OPCODE] == 4) {
+                        //output
+                        int a = 0;
+                        if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
+                            a = program[program[executionPoint + 1]];
+                        } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
+                            a = program[executionPoint + 1];
+                        }
+                        outputRegister = a;
+                        paused = true;
+                        executionPoint +=2;
+                    } else if (instruction[OPCODE] == 5) {
+                        //jump if param 1 != 0
+                        int test = 0;
+                        if (instruction[PARAMETER_MODE_1] == POSITION_MODE) {
+                            test = program[program[executionPoint + 1]];
+                        } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE) {
+                            test = program[executionPoint + 1];
+                        }
+                        if(test == 0) {
+                            executionPoint += 3;
+                        } else if (instruction[PARAMETER_MODE_2] == POSITION_MODE) {
                             executionPoint = program[program[executionPoint + 2]];
                         } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE) {
                             executionPoint = program[executionPoint + 2];
                         }
-                    } else { executionPoint += 3;}
-                } else if (instruction[OPCODE] == 7) {
-                    int a = 0;
-                    int b = 0;
-                    if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
-                        a = program[program[executionPoint + 1]];
-                    } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
-                        a = program[executionPoint + 1];
+                    } else if (instruction[OPCODE] == 6) {
+                        //jump if param 1 == 0
+                        int test = 0;
+                        if (instruction[PARAMETER_MODE_1] == POSITION_MODE) {
+                            test = program[program[executionPoint + 1]];
+                        } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE) {
+                            test = program[executionPoint + 1];
+                        }
+                        if(test == 0) {
+                            if (instruction[PARAMETER_MODE_2] == POSITION_MODE) {
+                                executionPoint = program[program[executionPoint + 2]];
+                            } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE) {
+                                executionPoint = program[executionPoint + 2];
+                            }
+                        } else { executionPoint += 3;}
+                    } else if (instruction[OPCODE] == 7) {
+                        int a = 0;
+                        int b = 0;
+                        if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
+                            a = program[program[executionPoint + 1]];
+                        } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
+                            a = program[executionPoint + 1];
+                        }
+                        if(instruction[PARAMETER_MODE_2] == POSITION_MODE) {
+                            b = program[program[executionPoint + 2]];
+                        } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE){
+                            b = program[executionPoint + 2];
+                        }
+                        program[program[executionPoint+3]] = a < b ? 1 : 0;
+                        executionPoint+=4;
+                    } else if (instruction[OPCODE] == 8) {
+                        int a = 0;
+                        int b = 0;
+                        if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
+                            a = program[program[executionPoint + 1]];
+                        } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
+                            a = program[executionPoint + 1];
+                        }
+                        if(instruction[PARAMETER_MODE_2] == POSITION_MODE) {
+                            b = program[program[executionPoint + 2]];
+                        } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE){
+                            b = program[executionPoint + 2];
+                        }
+                        program[program[executionPoint+3]] = a == b ? 1 : 0;
+                        executionPoint+=4;
+                    } else if(instruction[OPCODE] == 99){
+                        halted = true;
+                        break;
                     }
-                    if(instruction[PARAMETER_MODE_2] == POSITION_MODE) {
-                        b = program[program[executionPoint + 2]];
-                    } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE){
-                        b = program[executionPoint + 2];
-                    }
-                    program[program[executionPoint+3]] = a < b ? 1 : 0;
-                    executionPoint+=4;
-                } else if (instruction[OPCODE] == 8) {
-                    int a = 0;
-                    int b = 0;
-                    if(instruction[PARAMETER_MODE_1] == POSITION_MODE) {
-                        a = program[program[executionPoint + 1]];
-                    } else if (instruction[PARAMETER_MODE_1] == IMMEDIATE_MODE){
-                        a = program[executionPoint + 1];
-                    }
-                    if(instruction[PARAMETER_MODE_2] == POSITION_MODE) {
-                        b = program[program[executionPoint + 2]];
-                    } else if (instruction[PARAMETER_MODE_2] == IMMEDIATE_MODE){
-                        b = program[executionPoint + 2];
-                    }
-                    program[program[executionPoint+3]] = a == b ? 1 : 0;
-                    executionPoint+=4;
-                } else if(instruction[OPCODE] == 99){
-                    halted = true;
-                    break;
                 }
+                return outputRegister;
             }
-            return outputRegister;
-        }
     }
 
 }
