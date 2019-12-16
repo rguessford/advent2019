@@ -1,28 +1,27 @@
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 public class day15 {
-    public static final int OPCODE = 3;
-    public static final int PARAMETER_MODE_1 = 2;
-    public static final int PARAMETER_MODE_2 = 1;
-    public static final int PARAMETER_MODE_3 = 0;
+    private static final int OPCODE = 3;
+    private static final int PARAMETER_MODE_1 = 2;
+    private static final int PARAMETER_MODE_2 = 1;
+    private static final int PARAMETER_MODE_3 = 0;
 
-    public static final int POSITION_MODE = 0;
-    public static final int IMMEDIATE_MODE = 1;
-    public static final int RELATIVE_MODE = 2;
+    private static final int POSITION_MODE = 0;
+    private static final int IMMEDIATE_MODE = 1;
+    private static final int RELATIVE_MODE = 2;
 
-    public static final int STATUS_WALL = 0;
-    public static final int STATUS_MOVED = 1;
-    public static final int STATUS_FINISH = 2;
+    private static final int STATUS_WALL = 0;
+    private static final int STATUS_MOVED = 1;
+    private static final int STATUS_FINISH = 2;
 
-    public static final int MAP_UNEXPLORED = 0;
-    public static final int MAP_WALL = 1;
-    public static final int MAP_FLOOR = 2;
-    public static final int MAP_FINISH = 3;
-    public static final int MAP_OXYGENATED = 4;
+    private static final int MAP_UNEXPLORED = 0;
+    private static final int MAP_WALL = 1;
+    private static final int MAP_FLOOR = 2;
+    private static final int MAP_FINISH = 3;
+    private static final int MAP_OXYGENATED = 4;
 
     enum Direction {
         NORTH(1, 2), SOUTH(2, 1), WEST(3, 4), EAST(4, 3);
